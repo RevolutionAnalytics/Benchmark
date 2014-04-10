@@ -16,16 +16,7 @@
 #-------------------------------------------------------------------------------
 #- Load Packages
 library(RevoScaleR)
-library(iterators)
 library(methods)
-
-#- Define Benchmarking Parameters
-chunk_size       <- 100000
-xdf_chunk_size   <- 100000
-
-#########################################################################
-## start setup section                                                 ##
-#########################################################################
 
 #- Define Directories and Files for Work
 data_dir       <- "~/benchdata"
