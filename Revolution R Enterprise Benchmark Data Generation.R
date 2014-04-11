@@ -3,8 +3,6 @@
 # Project: Revoluton R Enterprise Benchmarking
 # Task: Revoluton R Enterprise Benchmark Data Generation
 # Description: This script is to generate the data detailed in the whitepaper.
-#              The analysis data are assumed to be in ANALYSIS (analysis_table.xdf),
-#              and the prediction data are in PREDICTION (prediction_table.xdf).
 #
 # version : date : author : change
 # 0 : 2014-03-31 : Revolution Analytics : Create Final Script
@@ -33,8 +31,8 @@
 show_progress <- TRUE
 #- Define Data Generation Parameters
 random_seed <- 12345
-data_size <- 1e6
-chunk_size <- 2e5 # data_size/chunk_size should be an integer and small enough to fit in RAM
+data_size <- 1e4
+chunk_size <- 2e3 # data_size/chunk_size should be an integer and small enough to fit in RAM
 num_text_fields <- 20
 num_integer_fields <- 250
 num_numeric_fields <- 250

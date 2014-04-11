@@ -19,7 +19,7 @@ library(RevoScaleR)
 library(methods)
 
 #- Define Directories and Files for Work
-data_dir       <- "~/benchdata"
+data_dir <- getwd()
 
 ANALYSIS <- file.path(data_dir, "analysis_table.xdf")
 PREDICTION <- file.path(data_dir, "prediction_table.xdf")
@@ -87,6 +87,13 @@ timings[6] <- system.time(
   )[[3]]
 
 #- Logistic regression
+# Compute median for numeric field F1
+f1_median <- rxQuantile(varName = "F1", data = ANALYSIS, probs = 0.5)
+# Create one new field B1 by “binning” F1 in two equal bins; assign values of 0 and 1
+rxDataStep(inData = ANALYSIS, outFile = ANALYSIS, 
+  transforms = list(B1 = as.integer(F1 > median_cut)), 
+  overwrite = TRUE, transformObjects = list(median_cut = f1_median))
+
 timings[7] <- system.time(
   glm1 <- rxLogit(as.formula(paste("B1 ~", numeric1)), data = ANALYSIS)
   )[[3]]
